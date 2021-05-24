@@ -590,7 +590,7 @@ _isis_tlv_names = {
     240: "Point-to-Point Three-Way Adjacency TLV",
     242: "IS-IS Router Capability TLV",
     251: "Generic Information TLV",
-    15: "ISIS_PortTlv"
+    15: "IS-IS Port TLV"
 }
 
 
@@ -607,7 +607,7 @@ class ISIS_AreaEntry(Packet):
         return "", s
 
 ## adding the port TLV
-class ISIS_PortEntryTLV(Packet):
+class ISIS_PortEntryTLV(ISIS_GenericTlv):
     name = "ISIS Port Entry"
     fields_desc = [ByteEnumField("type", 15, _isis_tlv_names),
                    FieldLenField("len", None, length_of="port", fmt="B"),

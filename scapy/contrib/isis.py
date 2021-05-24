@@ -542,7 +542,8 @@ _isis_tlv_classes = {
     232: "ISIS_Ipv6InterfaceAddressTlv",
     236: "ISIS_Ipv6ReachabilityTlv",
     240: "ISIS_P2PAdjacencyStateTlv",
-    242: "ISIS_RouterCapabilityTlv"
+    242: "ISIS_RouterCapabilityTlv",
+    15: "ISIS_PortTlv"
 }
 
 _isis_tlv_names = {
@@ -588,7 +589,8 @@ _isis_tlv_names = {
     237: "Multi-Topology IPv6 Reachability TLV",
     240: "Point-to-Point Three-Way Adjacency TLV",
     242: "IS-IS Router Capability TLV",
-    251: "Generic Information TLV"
+    251: "Generic Information TLV",
+    15: "ISIS_PortTlv"
 }
 
 
@@ -603,6 +605,13 @@ class ISIS_AreaEntry(Packet):
 
     def extract_padding(self, s):
         return "", s
+
+## adding the port TLV
+class ISIS_PortEntryTLV(Packet):
+    name = "ISIS Port Entry"
+    fields_desc = [ByteEnumField("type", 15, _isis_tlv_names),
+                   FieldLenField("len", None, length_of="port", fmt="B"),
+                   ShortField("port", 65535) ] # the maximum port value is used as we dont want to be the server
 
 
 class ISIS_AreaTlv(ISIS_GenericTlv):

@@ -607,7 +607,7 @@ class ISIS_AreaEntry(Packet):
         return "", s
 
 ## adding the port TLV
-class ISIS_PortTLV(ISIS_GenericTlv):
+class ISIS_PortTlv(ISIS_GenericTlv):
     name = "ISIS Port TLV"
     fields_desc = [ByteEnumField("type", 15, _isis_tlv_names),
                    FieldLenField("len", None, length_of="port", fmt="B"),
